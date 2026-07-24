@@ -1,4 +1,4 @@
-# API Documentation
+# StudyHub API Documentation
 
 ## Base URL
 
@@ -8,19 +8,19 @@ http://localhost:5000/api
 
 ---
 
-# Authentication
+## Authentication
 
-## Register
+### Register
 
 Creates a new user account.
 
-### Endpoint
+**Endpoint**
 
 ```http
 POST /auth/register
 ```
 
-### Request Body
+**Request Body**
 
 ```json
 {
@@ -30,7 +30,7 @@ POST /auth/register
 }
 ```
 
-### Success Response (201)
+**Success Response (201)**
 
 ```json
 {
@@ -38,7 +38,7 @@ POST /auth/register
 }
 ```
 
-### Error Response (400)
+**Error Response (400)**
 
 ```json
 {
@@ -48,17 +48,17 @@ POST /auth/register
 
 ---
 
-## Login
+### Login
 
-Authenticates a user.
+Authenticates a user and returns an access token.
 
-### Endpoint
+**Endpoint**
 
 ```http
 POST /auth/login
 ```
 
-### Request Body
+**Request Body**
 
 ```json
 {
@@ -67,7 +67,7 @@ POST /auth/login
 }
 ```
 
-### Success Response (200)
+**Success Response (200)**
 
 ```json
 {
@@ -75,23 +75,29 @@ POST /auth/login
 }
 ```
 
+**Error Response (401)**
+
+```json
+{
+  "message": "Invalid email or password."
+}
+```
+
 ---
 
-# Notes
+## Notes
 
 > All note endpoints require authentication.
 
----
+### Get All Notes
 
-## Get All Notes
-
-### Endpoint
+**Endpoint**
 
 ```http
 GET /notes
 ```
 
-### Success Response
+**Success Response (200)**
 
 ```json
 [
@@ -107,25 +113,45 @@ GET /notes
 
 ---
 
-## Get Single Note
+### Get Single Note
 
-### Endpoint
+**Endpoint**
 
 ```http
 GET /notes/:id
 ```
 
+**Success Response (200)**
+
+```json
+{
+  "id": 1,
+  "title": "Python Notes",
+  "content": "Classes and objects...",
+  "created_at": "2026-07-23T14:20:00",
+  "updated_at": "2026-07-23T14:20:00"
+}
+```
+
+**Error Response (404)**
+
+```json
+{
+  "message": "Note not found."
+}
+```
+
 ---
 
-## Create Note
+### Create Note
 
-### Endpoint
+**Endpoint**
 
 ```http
 POST /notes
 ```
 
-### Request Body
+**Request Body**
 
 ```json
 {
@@ -134,7 +160,7 @@ POST /notes
 }
 ```
 
-### Success Response
+**Success Response (201)**
 
 ```json
 {
@@ -144,15 +170,15 @@ POST /notes
 
 ---
 
-## Update Note
+### Update Note
 
-### Endpoint
+**Endpoint**
 
 ```http
 PUT /notes/:id
 ```
 
-### Request Body
+**Request Body**
 
 ```json
 {
@@ -161,17 +187,33 @@ PUT /notes/:id
 }
 ```
 
+**Success Response (200)**
+
+```json
+{
+  "message": "Note updated successfully."
+}
+```
+
+**Error Response (404)**
+
+```json
+{
+  "message": "Note not found."
+}
+```
+
 ---
 
-## Delete Note
+### Delete Note
 
-### Endpoint
+**Endpoint**
 
 ```http
 DELETE /notes/:id
 ```
 
-### Success Response
+**Success Response (200)**
 
 ```json
 {
@@ -179,54 +221,86 @@ DELETE /notes/:id
 }
 ```
 
+**Error Response (404)**
+
+```json
+{
+  "message": "Note not found."
+}
+```
+
 ---
 
-# Attachments
+## Attachments
 
-## Upload Attachment
+### Upload Attachment
 
-### Endpoint
+**Endpoint**
 
 ```http
 POST /attachments
 ```
 
-### Content Type
+**Content Type**
 
 ```
 multipart/form-data
 ```
 
-### Fields
+**Fields**
 
-| Name | Type |
-|------|------|
-| file | File |
-| note_id | Integer |
+| Name | Type | Description |
+|---|---|---|
+| file | File | The file to upload |
+| note_id | Integer | The note to attach the file to |
+
+**Success Response (201)**
+
+```json
+{
+  "message": "Attachment uploaded successfully."
+}
+```
 
 ---
 
-## Delete Attachment
+### Delete Attachment
 
-### Endpoint
+**Endpoint**
 
 ```http
 DELETE /attachments/:id
 ```
 
+**Success Response (200)**
+
+```json
+{
+  "message": "Attachment deleted successfully."
+}
+```
+
+**Error Response (404)**
+
+```json
+{
+  "message": "Attachment not found."
+}
+```
+
 ---
 
-# Study Sessions
+## Study Sessions
 
-## Create Session
+### Create Session
 
-### Endpoint
+**Endpoint**
 
 ```http
 POST /sessions
 ```
 
-### Request Body
+**Request Body**
 
 ```json
 {
@@ -235,29 +309,52 @@ POST /sessions
 }
 ```
 
+**Success Response (201)**
+
+```json
+{
+  "message": "Session started successfully."
+}
+```
+
 ---
 
-## Get All Sessions
+### Get All Sessions
 
-### Endpoint
+**Endpoint**
 
 ```http
 GET /sessions
 ```
 
+**Success Response (200)**
+
+```json
+[
+  {
+    "id": 1,
+    "subject": "Python",
+    "started_at": "2026-07-23T14:00:00",
+    "ended_at": "2026-07-23T14:35:00",
+    "duration_minutes": 35,
+    "status": "completed"
+  }
+]
+```
+
 ---
 
-# Leaderboard
+## Leaderboard
 
-## Get Leaderboard
+### Get Leaderboard
 
-### Endpoint
+**Endpoint**
 
 ```http
 GET /leaderboard
 ```
 
-### Success Response
+**Success Response (200)**
 
 ```json
 [
@@ -274,9 +371,9 @@ GET /leaderboard
 
 ---
 
-# Authentication Header
+## Authentication Header
 
-Protected endpoints require:
+Protected endpoints require the access token to be sent as a Bearer token:
 
 ```http
 Authorization: Bearer <access_token>
@@ -284,10 +381,10 @@ Authorization: Bearer <access_token>
 
 ---
 
-# Status Codes
+## Status Codes
 
 | Code | Meaning |
-|------|---------|
+|---|---|
 | 200 | OK |
 | 201 | Created |
 | 400 | Bad Request |

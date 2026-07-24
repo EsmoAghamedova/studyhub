@@ -1,6 +1,6 @@
-# Backend Technical Documentation
+# StudyHub Backend Technical Documentation
 
-# Overview
+## Overview
 
 The backend is built using **Python** and **Flask**. It provides a REST API that allows the frontend to authenticate users, manage notes, upload attachments, record study sessions, and retrieve leaderboard data.
 
@@ -15,7 +15,7 @@ The backend is responsible for:
 
 ---
 
-# Technologies
+## Technologies
 
 - Python 3
 - Flask
@@ -28,11 +28,10 @@ The backend is responsible for:
 
 ---
 
-# Project Structure
+## Project Structure
 
 ```
 backend/
-
 ├── models/
 │   ├── __init__.py
 │   ├── user.py
@@ -58,35 +57,35 @@ backend/
 
 ---
 
-# Architecture
+## Architecture
 
-The backend follows a simple layered structure.
+The backend follows a simple layered structure:
 
 ```
 HTTP Request
-      │
-      ▼
+     │
+     ▼
 Flask Route
-      │
-      ▼
+     │
+     ▼
 Database Model
-      │
-      ▼
+     │
+     ▼
 SQLite / PostgreSQL
-      │
-      ▼
+     │
+     ▼
 JSON Response
 ```
 
 ---
 
-# Application Entry Point
+## Application Entry Point
 
 **app.py**
 
 Responsibilities:
 
-- Create Flask application
+- Create the Flask application
 - Load configuration
 - Initialize extensions
 - Register blueprints
@@ -94,7 +93,7 @@ Responsibilities:
 
 ---
 
-# Configuration
+## Configuration
 
 **config.py**
 
@@ -109,7 +108,7 @@ Environment variables are loaded from the `.env` file.
 
 ---
 
-# Database
+## Database
 
 **database.py**
 
@@ -117,14 +116,14 @@ Initializes SQLAlchemy.
 
 Responsibilities:
 
-- Create database connection
-- Initialize ORM
+- Create the database connection
+- Initialize the ORM
 
 ---
 
-# Models
+## Models
 
-The `models` folder contains all database tables.
+The `models` folder contains all database tables. Each model represents one database table.
 
 Current models:
 
@@ -132,13 +131,11 @@ Current models:
 - Note
 - Study Session
 
-Each model represents one database table.
-
 ---
 
-# Routes
+## Routes
 
-The `routes` folder contains API endpoints.
+The `routes` folder contains the API endpoints.
 
 ### auth.py
 
@@ -147,8 +144,6 @@ Handles:
 - User registration
 - User login
 - JWT authentication
-
----
 
 ### notes.py
 
@@ -159,16 +154,12 @@ Handles:
 - Update note
 - Delete note
 
----
-
 ### sessions.py
 
 Handles:
 
 - Create study session
 - View study sessions
-
----
 
 ### leaderboard.py
 
@@ -179,33 +170,25 @@ Handles:
 
 ---
 
-# Authentication
+## Authentication
 
-Authentication uses **JWT (JSON Web Token).**
+Authentication uses **JWT (JSON Web Token)**.
 
 Flow:
 
 ```
 User Login
-
-      │
-      ▼
-
+     │
+     ▼
 Verify Credentials
-
-      │
-      ▼
-
+     │
+     ▼
 Generate JWT Token
-
-      │
-      ▼
-
+     │
+     ▼
 Return Token
-
-      │
-      ▼
-
+     │
+     ▼
 Client sends token with protected requests
 ```
 
@@ -217,52 +200,38 @@ Authorization: Bearer <JWT_TOKEN>
 
 ---
 
-# Database Flow
+## Database Flow
 
 ```
 Request
-
    │
-
    ▼
-
 Route
-
    │
-
    ▼
-
 Model
-
    │
-
    ▼
-
 Database
-
    │
-
    ▼
-
 JSON Response
 ```
 
 ---
 
-# Error Handling
+## Error Handling
 
 The backend returns appropriate HTTP status codes.
 
-Examples:
-
-| Status Code | Description           |
-| ----------- | --------------------- |
-| 200         | Success               |
-| 201         | Resource Created      |
-| 400         | Bad Request           |
-| 401         | Unauthorized          |
-| 404         | Resource Not Found    |
-| 500         | Internal Server Error |
+| Status Code | Description |
+|---|---|
+| 200 | Success |
+| 201 | Resource Created |
+| 400 | Bad Request |
+| 401 | Unauthorized |
+| 404 | Resource Not Found |
+| 500 | Internal Server Error |
 
 Example response:
 
@@ -274,7 +243,7 @@ Example response:
 
 ---
 
-# Testing
+## Testing
 
 Tests are located inside the `tests` directory.
 
@@ -287,7 +256,7 @@ Planned tests:
 
 ---
 
-# Future Improvements
+## Future Improvements
 
 Possible backend improvements:
 

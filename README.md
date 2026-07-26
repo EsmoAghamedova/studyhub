@@ -37,7 +37,8 @@ A full-stack study productivity application built with React and Flask.
 - Esmira — API, database, auth
 
 **Frontend**
-- Guys Change it 🤗
+- 1 Cat
+- 2 Humans
 
 ## Installation
 
@@ -55,7 +56,17 @@ Backend runs at `http://localhost:5000`
 
 ### Frontend
 
-*(Frontend team: add your own setup instructions here.)*
+just go to the frontend directory by
+```bash
+cd frontend 
+npm run dev
+```
+you can test for SEO issues by doing 
+```bash
+cd frontend 
+npm run build
+npm run preview
+```
 
 ## Project Structure
 

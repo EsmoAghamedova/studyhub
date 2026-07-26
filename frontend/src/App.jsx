@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes } from 'react-router';
-import { PAGE_PATHS } from './Configs/Pages';
+import { BrowserRouter, Routes, Route } from 'react-router';
+import { PAGE_PATHS } from './Configs/Pages.js';
 import { Dashboard } from './Pages/Dashboard';
 import { Leaderboard } from './Pages/Leaderboard';
 import { Login } from './Pages/Login';
@@ -9,18 +9,19 @@ import { NoteDetails } from './Pages/NoteDetails';
 import { Navbar } from './Components/Navbar';
 function App() {
   return (
-    <section className='flex gap-4'>
+    <section className='flex flex-col sm:flex-row gap-4 h-screen w-screen
+    bg-page-bg text-page-fg'>
       <BrowserRouter>
         <Navbar />
-        <main>
-
-          <Routes path={PAGE_PATHS.dashboard} element={<Dashboard />} />
-          <Routes path={PAGE_PATHS.dashboard} element={<NoteDetails />} />
-          <Routes path={PAGE_PATHS.dashboard} element={<Notes />} />
-          <Routes path={PAGE_PATHS.dashboard} element={<Leaderboard />} />
-          <Routes path={PAGE_PATHS.dashboard} element={<Register />} />
-          <Routes path={PAGE_PATHS.dashboard} element={<Login />} />
-
+        <main className='p-6'>
+          <Routes>
+            <Route path={PAGE_PATHS.dashboard} element={<Dashboard />} />
+            <Route path={PAGE_PATHS.noteDetails} element={<NoteDetails />} />
+            <Route path={PAGE_PATHS.notes} element={<Notes />} />
+            <Route path={PAGE_PATHS.leaderBoard} element={<Leaderboard />} />
+            <Route path={PAGE_PATHS.register} element={<Register />} />
+            <Route path={PAGE_PATHS.login} element={<Login />} />
+          </Routes>
         </main>
       </BrowserRouter>
     </section >

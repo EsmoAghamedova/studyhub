@@ -20,8 +20,3 @@
     --color-danger-color: oklch(0.7106 0.1661 22.2162);
     --color-danger-fg: oklch(0.2575 0.0886 26.0418);
 }
-
-body {
-    background: var(--color-page-bg);
-    color: var(--color-page-fg);
-}

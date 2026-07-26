@@ -1,8 +1,60 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "oxc"],
+  "plugins": ["react", "unicorn", "import", "jsx-a11y", "oxc", "promise", "react-perf"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "pedantic": "warn",
+    "style": "warn",
+    "perf": "warn",
+    "restriction": "warn"
+  },
+  "env": {
+    "browser": true,
+    "es2024": true
+  },
+  "settings": {
+    "react": {
+      "version": "18.2"
+    }
+  },
   "rules": {
     "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
+    "react/only-export-components": ["warn", { "allowConstantExport": true }],
+    "react/jsx-key": "error",
+    "react/no-array-index-key": "warn",
+    "react/self-closing-comp": "warn",
+    "react/jsx-no-useless-fragment": "warn",
+    "react/jsx-boolean-value": ["warn", "never"],
+    "react/prop-types": "off",
+    "react-perf/jsx-no-new-object-as-prop": "warn",
+    "react-perf/jsx-no-new-array-as-prop": "warn",
+    "react-perf/jsx-no-new-function-as-prop": "warn",
+
+    "eslint/no-console": ["warn", { "allow": ["warn", "error"] }],
+    "eslint/eqeqeq": ["error", "always"],
+    "eslint/no-var": "error",
+    "eslint/prefer-const": "error",
+    "eslint/no-debugger": "error",
+    "eslint/no-alert": "warn",
+    "eslint/no-unused-vars": "error",
+
+    "unicorn/no-null": "off",
+    "unicorn/prevent-abbreviations": "off",
+    "unicorn/filename-case": "off",
+
+    "import/no-cycle": "error",
+    "import/no-unresolved": "off",
+
+    "jsx-a11y/alt-text": "error",
+    "jsx-a11y/anchor-is-valid": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.{js,jsx}", "**/*.spec.{js,jsx}"],
+      "rules": {
+        "eslint/no-console": "off"
+      }
+    }
+  ]
 }

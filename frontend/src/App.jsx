@@ -7,25 +7,26 @@ import { Register } from './Pages/Register';
 import { Notes } from './Pages/Notes';
 import { NoteDetails } from './Pages/NoteDetails';
 import { Navbar } from './Components/Navbar.jsx';
+import { AuthProvider } from './context/AuthContext.jsx';
 function App() {
   return (
-    <section className='flex flex-col sm:flex-row gap-4 h-screen w-screen
-    bg-page-bg text-page-fg'>
-      <BrowserRouter>
-        <Navbar />
-        <main className='p-6'>
-          <Routes>
-            <Route path={PAGE_PATHS.dashboard} element={<Dashboard />} />
-            <Route path={PAGE_PATHS.noteDetails} element={<NoteDetails />} />
-            <Route path={PAGE_PATHS.notes} element={<Notes />} />
-            <Route path={PAGE_PATHS.leaderBoard} element={<Leaderboard />} />
-            <Route path={PAGE_PATHS.register} element={<Register />} />
-            <Route path={PAGE_PATHS.login} element={<Login />} />
-          </Routes>
-        </main>
-      </BrowserRouter>
-    </section >
+    <section className='flex flex-col sm:flex-row gap-4 h-screen w-screen bg-page-bg text-page-fg'>
+      <AuthProvider>
+        <BrowserRouter>
+          <Navbar />
+          <main className='p-6'>
+            <Routes>
+              <Route path={PAGE_PATHS.dashboard} element={<Dashboard />} />
+              <Route path={PAGE_PATHS.noteDetails} element={<NoteDetails />} />
+              <Route path={PAGE_PATHS.notes} element={<Notes />} />
+              <Route path={PAGE_PATHS.leaderBoard} element={<Leaderboard />} />
+              <Route path={PAGE_PATHS.register} element={<Register />} />
+              <Route path={PAGE_PATHS.login} element={<Login />} />
+            </Routes>
+          </main>
+        </BrowserRouter>
+      </AuthProvider>
+    </section>
   )
 }
-
 export default App

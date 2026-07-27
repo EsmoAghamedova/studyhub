@@ -23,7 +23,7 @@ export function Navbar() {
       sm:w-60 sm:items-start sm:justify-start sm:h-screen sm:pt-4 sm:border-b-0 sm:border-r">
       <ol className="flex w-full sm:flex-col gap-4">
         <li>
-          <NavLink to={PAGE_PATHS.dashboard} className={linkClass}>
+          <NavLink to={PAGE_PATHS.register} className={linkClass}>
             📚 StudyHub
           </NavLink>
         </li>

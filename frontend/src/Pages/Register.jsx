@@ -1,45 +1,45 @@
 import { useState } from "react"
-import {Link, useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../context/AuthContext'
 import { authApi } from '../API/AuthApi'
 
 export function Register() {
 
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-    const {login} = useAuth()
-    const navigate = useNavigate()
+  const { login } = useAuth()
+  const navigate = useNavigate()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        setError('')
-        setLoading(true)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setError('')
+    setLoading(true)
 
-        try{
-            //call the backend API to register
-            const data = await authApi.register(username, email, password)
+    try {
+      //call the backend API to register
+      const data = await authApi.register(username, email, password)
 
-            //save the JWT token and user data to context/loacalStorage
-            login(data.user, data.access_token)
+      //save the JWT token and user data to context/loacalStorage
+      login(data.user, data.access_token)
 
-            //Redirect to dashboard on success
-            navigate('/dashboard')
-        }catch(err){
-            //show error message from backend, or a generic one
-            setError(err.response?.data?.message || 'Registration Failed.Please try again')
-        }finally{
-            setLoading(false)
-        }
+      //Redirect to dashboard on success
+      navigate('/dashboard')
+    } catch (err) {
+      //show error message from backend, or a generic one
+      setError(err.response?.data?.message || 'Registration Failed.Please try again')
+    } finally {
+      setLoading(false)
     }
+  }
 
-    return (
-<div className="min-h-screen bg-page-bg flex items-center justify-center p-4">
+  return (
+    <div className="min-h-screen bg-page-bg flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        
+
         {/* Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-surface-muted-bg rounded-2xl mb-4 border border-surface-muted-fg/20">
@@ -56,7 +56,7 @@ export function Register() {
         {/* Form Card */}
         <div className="bg-surface-bg rounded-2xl p-8 shadow-xl border border-surface-muted-bg">
           <form onSubmit={handleSubmit} className="space-y-5">
-            
+
             {/* Error Message */}
             {error && (
               <div className="bg-danger-color/10 border border-danger-color/30 text-danger-color px-4 py-3 rounded-xl text-sm flex items-center gap-2">
@@ -130,8 +130,8 @@ export function Register() {
           <div className="mt-6 text-center">
             <p className="text-sm text-surface-muted-fg">
               Already have an account?{' '}
-              <Link 
-                to="/login" 
+              <Link
+                to="/login"
                 className="text-accent-bg font-semibold hover:text-primary-bg transition-colors"
               >
                 Login here 🔑
@@ -148,6 +148,6 @@ export function Register() {
         </div>
       </div>
     </div>
- 
-    )
+
+  )
 }

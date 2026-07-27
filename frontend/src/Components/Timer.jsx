@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import {sessionsApi} from '../API/SessionsApi'
+import { useState, useEffect, useRef } from "react";
+import { sessionsApi } from '../API/SessionsApi'
 
 export default function Timer() {
   const [mode, setMode] = useState('study') // 'study' | 'break'
@@ -69,11 +69,10 @@ export default function Timer() {
 
       {/* Mode indicator */}
       <div className="flex justify-center gap-2 mb-6">
-        <span className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all ${
-          mode === 'study'
+        <span className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all ${mode === 'study'
             ? 'bg-brand-100 text-brand-700'
             : 'bg-green-100 text-green-700'
-        }`}>
+          }`}>
           {mode === 'study' ? '📖 Study Time' : '☕ Break Time'}
         </span>
       </div>
@@ -120,11 +119,10 @@ export default function Timer() {
       <div className="flex justify-center gap-3">
         <button
           onClick={toggleTimer}
-          className={`px-6 py-2.5 rounded-xl font-semibold transition-all duration-200 ${
-            isRunning
+          className={`px-6 py-2.5 rounded-xl font-semibold transition-all duration-200 ${isRunning
               ? 'bg-red-500 hover:bg-red-600 text-white shadow-lg shadow-red-200'
               : 'bg-brand-600 hover:bg-brand-700 text-white shadow-lg shadow-brand-200'
-          }`}
+            }`}
         >
           {isRunning ? '⏸ Pause' : '▶ Start'}
         </button>

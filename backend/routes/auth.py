@@ -82,10 +82,10 @@ def register():
     try:
         db.session.add(user)
         db.session.commit()
-    except:
-        db.session.rollback
+    except IntegrityError:
+        db.session.rollback()
         logger.warning(
-            "Registration conflict for username=%s email=%s", username, email)
+            "Registration conflict for username=%s email=%s", username)
         return {
             "message": "Username or email already exists."
         }, 409

@@ -1,5 +1,10 @@
+import re
+import logging
+
 from flask import Blueprint, request
 from flask_jwt_extended import create_access_token
+from sqlalchemy.exc import IntegrityError
+
 from database import db
 from models.user import User
 
@@ -7,6 +12,14 @@ auth_bp = Blueprint(
     "auth",
     __name__
 )
+
+logger = logging.getLogger(__name__)
+
+EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+
+USERNAME_MIN_LEN = 3
+USERNAME_MAX_LEN = 32
+USERNAME_RE = re.compile(r"^[A-Za-z0-9_.-]+$")
 
 
 @auth_bp.route("/register", methods=["POST"])
@@ -24,6 +37,23 @@ def register():
 
     username = username.strip()
     email = email.strip().lower()
+
+    if not (USERNAME_MIN_LEN <= len(username) <= USERNAME_MAX_LEN):
+        return {
+            "message": f"Username must be between {USERNAME_MIN_LEN} and "
+            f"{USERNAME_MAX_LEN} characters."
+        }, 400
+
+    if not USERNAME_RE.match(username):
+        return {
+            "message": "Username may only contain letters, numbers, "
+            "underscores, dots and hyphens."
+        }, 400
+
+    if not EMAIL_RE.match(email):
+        return {
+            "message": "Please provide a valid email address."
+        }, 400
 
     if len(password) < 8:
         return {
@@ -49,8 +79,18 @@ def register():
 
     user.set_password(password)
 
-    db.session.add(user)
-    db.session.commit()
+    try:
+        db.session.add(user)
+        db.session.commit()
+    except:
+        db.session.rollback
+        logger.warning(
+            "Registration conflict for username=%s email=%s", username, email)
+        return {
+            "message": "Username or email already exists."
+        }, 409
+
+    logger.info("New user registered: %s", username)
 
     return {
         "message": "Account created successfully."
@@ -81,6 +121,8 @@ def login():
     access_token = create_access_token(
         identity=user.id
     )
+
+    logger.info("User logged in: %s", user.username)
 
     return {
         "message": "Login successful.",

@@ -77,3 +77,33 @@ export function checkTimePassed(start, end = Date.now(), checkForTime) {
         return false;
     }
 }
+
+export function formatHours(mins) {
+    const h = Math.floor(mins / 60);
+    const m = mins % 60;
+    return `${h}h ${m.toString().padStart(2, "0")}m`;
+}
+
+export function formatTimeAgo(isoString) {
+    const now = new Date();
+    const then = new Date(isoString);
+    const diffMs = now - then;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMins / 60);
+    const diffDays = Math.floor(diffHours / 24);
+
+    if (diffMins < 1) return "just now";
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays === 1) return "Yesterday";
+    if (diffDays < 7) return `${diffDays} days ago`;
+
+    return then.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
+
+export function trimText(content, maxLength = 50) {
+    if (content.length <= maxLength) return content;
+    const trimmed = content.slice(0, maxLength);
+    const lastSpace = trimmed.lastIndexOf(" ");
+    return trimmed.slice(0, lastSpace) + "…";
+}

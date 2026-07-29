@@ -7,13 +7,14 @@ import { Register } from './Pages/Register';
 import { Notes } from './Pages/Notes';
 import { NoteDetails } from './Pages/NoteDetails';
 import { Navbar } from './Components/Navbar';
+
 function App() {
   return (
-    <section className='flex flex-col sm:flex-row gap-4 h-screen w-screen
+    <section className='flex flex-col sm:flex-row h-screen w-full
     bg-page-bg text-page-fg'>
       <BrowserRouter>
         <Navbar />
-        <main className='p-6'>
+        <main className='flex-1 overflow-y-auto p-6'>
           <Routes>
             <Route path={PAGE_PATHS.dashboard} element={<Dashboard />} />
             <Route path={PAGE_PATHS.noteDetails} element={<NoteDetails />} />
@@ -24,7 +25,7 @@ function App() {
           </Routes>
         </main>
       </BrowserRouter>
-    </section >
+    </section>
   )
 }
 

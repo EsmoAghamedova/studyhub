@@ -4,7 +4,6 @@ export const dashboardData = {
     email: "alex@example.com",
   },
 
-  // maps to GET /api/dashboard
   stats: {
     totalMinutes: 900,
     currentStreak: 7,
@@ -16,7 +15,6 @@ export const dashboardData = {
     points: 600
   },
 
-  // maps to GET /api/notes, most recent first
   recentNotes: [
     {
       id: 1,
@@ -27,6 +25,7 @@ export const dashboardData = {
     },
     {
       id: 2,
+      
       title: "Linear Equations",
       category: "Math",
       content: 'A linear equation graphs as a straight line. Slope-intercept form is y = mx + b, where m is the slope and b is where it crosses the y-axis.',
@@ -47,11 +46,9 @@ export const dashboardData = {
       created_at: "2026-07-27T09:15:00Z"
     }
   ],
-
-  // maps to GET /api/leaderboard
   leaderboard: [
-    { rank: 1, username: "esmo", totalMinutes: 7200, icon: '/assets/ranking-icons/first.svg' },
-    { rank: 2, username: "sarah", totalMinutes: 5880, icon: '/assets/ranking-icons/second.svg' },
-    { rank: 3, username: "alex", totalMinutes: 4500, self: true, icon: '/assets/ranking-icons/third.svg' },
+    { rank: 1, username: "catnumber1", points: 100, totalMinutes: 7200, icon: '/assets/ranking-icons/first.svg' },
+    { rank: 2, username: "catnumber2", points: 60, totalMinutes: 5880, icon: '/assets/ranking-icons/second.svg' },
+    { rank: 3, username: "alex", points: 40, totalMinutes: 4500, self: true, icon: '/assets/ranking-icons/third.svg' },
   ],
 };

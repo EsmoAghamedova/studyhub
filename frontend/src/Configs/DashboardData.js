@@ -13,18 +13,8 @@ export const dashboardData = {
     topSubjectMin: 400,
     totalNotes: 14,
     totalSessions: 22,
+    points: 600
   },
-
-  // maps to GET /api/sessions, aggregated by day for the current week
-  weekActivity: [
-    { day: "Mon", minutes: 45 },
-    { day: "Tue", minutes: 60 },
-    { day: "Wed", minutes: 30 },
-    { day: "Thu", minutes: 90 },
-    { day: "Fri", minutes: 0 },
-    { day: "Sat", minutes: 75 },
-    { day: "Sun", minutes: 50 },
-  ],
 
   // maps to GET /api/notes, most recent first
   recentNotes: [
@@ -49,12 +39,19 @@ export const dashboardData = {
       content: 'Mitochondria is the powerhouse of the cell — no wait, actually go deeper than that, it handles ATP synthesis through oxidative phosphorylation.',
       created_at: "2026-07-27T09:15:00Z"
     },
+    {
+      id: 4,
+      title: "Cell Structure Recap",
+      category: "Biology",
+      content: 'Mitochondria is the powerhouse of the cell — no wait, actually go deeper than that, it handles ATP synthesis through oxidative phosphorylation.',
+      created_at: "2026-07-27T09:15:00Z"
+    }
   ],
 
   // maps to GET /api/leaderboard
   leaderboard: [
-    { rank: 1, username: "esmo", total_minutes: 7200 },
-    { rank: 2, username: "sarah", total_minutes: 5880 },
-    { rank: 3, username: "alex", total_minutes: 4500, self: true },
+    { rank: 1, username: "esmo", totalMinutes: 7200, icon: '/assets/ranking-icons/first.svg' },
+    { rank: 2, username: "sarah", totalMinutes: 5880, icon: '/assets/ranking-icons/second.svg' },
+    { rank: 3, username: "alex", totalMinutes: 4500, self: true, icon: '/assets/ranking-icons/third.svg' },
   ],
 };

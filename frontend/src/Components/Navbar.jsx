@@ -19,9 +19,9 @@ export function Navbar() {
     };
 
     return (
-        <nav className='bg-surface-bg w-screen h-14 px-2
+        <nav className='bg-surface-bg w-full h-20 px-2 border-b-2 border-accent-bg
         flex items-center border-r border-r-surface-muted-bg
-        sm:w-60 sm:items-start sm:justify-start sm:h-screen sm:pt-4'>
+        sm:w-60 sm:items-start sm:justify-start sm:h-full sm:pt-4 sm:border-none'>
             <ol className='flex w-full sm:flex-col gap-4'>
                 <li className=''>
                     <NavLink to={PAGE_PATHS.register} className={linkClass}>Studyhub</NavLink>

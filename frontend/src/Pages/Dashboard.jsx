@@ -93,7 +93,7 @@ function NotesAndLeaderboard() {
 function Leaderboard({ list }) {
     if (!list?.length) {
         return (
-            <section className="text-center py-10 text-white/40 text-sm max-w-200 gradient-bg">
+            <section className="text-center py-10 text-white/40 text-sm max-w-100 gradient-bg">
                 No one's logged hours yet.
                 They are lazy... just like you, be the first and break the cycle?
                 nope. You're king of lazyness.
@@ -107,7 +107,7 @@ function Leaderboard({ list }) {
         <section className='bg-surface-muted-bg gradient-bg
         border-b border-r border-primary-bg/30
         drop-shadow-xl drop-shadow-primary-bg/30
-        p-5 flex flex-col gap-6 rounded-lg w-full max-w-200'>
+        p-5 flex flex-col gap-6 rounded-lg w-full max-w-140'>
             <div className='flex gap-6'>
                 <div>
                     <div className='text-lg text-surface-muted-fg'>Total points</div>
@@ -118,7 +118,7 @@ function Leaderboard({ list }) {
                     <span className='sm:text-xl text-sm font-medium'>{dashboardData.stats.topSubject} ( {formatHours(dashboardData.stats.topSubjectMin)} )</span>
                 </div>
             </div>
-            <div className="flex flex-col gap-2 w-full max-w-150">
+            <div className="flex flex-col gap-2 w-full max-w-100">
                 {list.map(listItem => {
                     const isTop3 = listItem.rank <= 3;
                     return (
